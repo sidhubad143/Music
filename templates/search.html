@@ -1,0 +1,50 @@
+<!-- templates/search.html -->
+{% extends "base.html" %}
+
+{% block title %}Search - Music Player{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card p-4">
+            <h2 class="text-center mb-4">🔍 Search Results</h2>
+            
+            <!-- Back to Home Link -->
+            <div class="text-center mb-3">
+                <a href="/" class="btn btn-outline-light">← Back to Home</a>
+            </div>
+            
+            <!-- Search Form (for new search) -->
+            <form action="/search" method="POST" class="d-flex justify-content-center mb-4">
+                <input type="text" class="form-control me-2" name="query" placeholder="Enter song name..." value="{{ query or '' }}" {% if not query %}required{% endif %}>
+                <select name="streamtype" class="form-select me-2" style="width: auto; border-radius: 25px; background: rgba(255, 255, 255, 0.1); color: white;">
+                    <option value="audio" {% if streamtype == 'audio' %}selected{% endif %}>Audio</option>
+                    <option value="video" {% if streamtype == 'video' %}selected{% endif %}>Video</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            
+            {% if error %}
+            <div class="alert error">{{ error }}</div>
+            {% endif %}
+            
+            {% if link %}
+            <div class="player">
+                <h3>{{ title }}</h3>
+                {% if streamtype == 'video' %}
+                <video controls width="100%" height="auto" class="rounded">
+                    <source src="{{ link }}" type="video/mp4">
+                    Your browser does not support video playback.
+                </video>
+                {% else %}
+                <audio controls class="w-100">
+                    <source src="{{ link }}" type="audio/mpeg">
+                    Your browser does not support audio playback.
+                </audio>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
