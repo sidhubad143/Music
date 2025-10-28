@@ -1,0 +1,37 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Home - Music Player{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-4 text-center">
+            <h1 class="mb-4">🎧 Welcome to Music Hub</h1>
+            <p class="lead">Search and play your favorite songs or videos instantly!</p>
+            <form action="/search" method="POST" class="d-flex justify-content-center mb-3">
+                <input type="text" class="form-control me-2" name="query" placeholder="Enter song name..." required style="width: 300px;">
+                <select name="streamtype" class="form-select me-2" style="width: auto; border-radius: 25px; background: rgba(255, 255, 255, 0.1); color: white;">
+                    <option value="audio">Audio</option>
+                    <option value="video">Video</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Search & Play</button>
+            </form>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h5>Features</h5>
+                    <ul class="list-unstyled">
+                        <li>🔍 Instant Search</li>
+                        <li>🎵 Audio Streaming</li>
+                        <li>📺 Video Playback</li>
+                        <li>🌈 Colorful UI</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://via.placeholder.com/300x200/667eea/ffffff?text=Music+Player" alt="Music Player" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
